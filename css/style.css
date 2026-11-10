@@ -1,0 +1,106 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --preto : #040303;
+    --verde-escuro : #1E3E35;
+    --verde-principal : #387966;
+    --cinza-escuro : #3A4E48;
+    --cinza : #6A7B76;
+    --banner : #B7BDAE;
+    --fundo : #E2DDD9;
+
+    --transicao : all 0.3s ease-in-out;
+}
+
+/* -- header -- */
+
+header#topoSite{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 10vh;   
+
+    background-color: var(--verde-escuro);
+}
+
+#menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    width: 90%;
+    height: 60%;
+}
+
+#menu #titulo{
+    height: 100%;
+}
+
+/* -- label barra de pesquisa -- */
+
+#menu label{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 30%;
+    height: 70%;
+
+    background-color: var(--fundo);
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+#menu label svg{
+    font-size: 0.7rem;
+    color: var(--preto);
+}
+
+#menu label #barraPesquisa{
+    appearance: none;
+
+    width: 90%;
+    height: 100%;
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    font-size: .5rem;
+}
+
+#menu label #barraPesquisa::placeholder{
+    color: var(--preto);
+    opacity: 0.7;
+}
+
+/* -- botões header -- */
+.btns-navegacao{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 2vw;
+    
+    height: 100%;
+}
+
+.btns-navegacao .btn-nav{
+    appearance: none;
+    border: none;
+    height: 100%;
+    padding: .5vw;
+
+    background-color: var(--verde-principal);
+    color: var(--fundo);
+}
+
+.btns-navegacao .btn-nav img{
+    height: 110%;
+}

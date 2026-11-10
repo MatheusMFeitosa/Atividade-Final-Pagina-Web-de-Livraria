@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../media/logo.svg" type="image/x-icon">
+    <title>Book-e</title>
+</head>
+
+<body>
+    <header id="topoSite">
+        <nav id="menu">
+            <img src="../media/logoTitulo.svg" alt="logo" id="titulo">
+
+            <label for="barraPesquisa">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search"name="barra_pesquisa" id="barraPesquisa" placeholder="Sua próxima história..">
+            </label>
+
+            <div class="btns-navegacao">
+                <button class="btn-nav"><i class="fa-solid fa-bag-shopping"></i></button>
+                <button class="btn-nav"><img src="../media/catalogo.svg" alt="SVG Catalogo"></button>
+            </div>
+        </nav>
+    </header>
+    <main id="corpoSite">
+        <section class="container-banner">
+            <div class="banner">
+                <div id="conteudoBanner">
+                    <h2 class="titulo"></h2>
+                    <p class="texto-principal"></p>
+                    <button id="btnAcao"></button>
+                </div>
+                
+                <img src="" alt="Livro Promoção">
+            </div>
+        </section>
+
+        <section class="container-catalogo">
+            <header id="conteiner_filtros">
+                <h2>Catálogo</h2>
+                <nav id="filtros">
+                    <p class="filtro">Fantasia</p>
+                    <p class="filtro">Ação</p>
+                    <p class="filtro">Suspense</p>
+                    <p class="filtro">Ficção</p>
+                </nav>
+            </header>
+
+            <main id="catalogoLivros"></main>
+        </section>
+    </main>
+
+    <script src="https://kit.fontawesome.com/d02a564654.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
