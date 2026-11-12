@@ -16,6 +16,11 @@
     --transicao : all 0.3s ease-in-out;
 }
 
+/* -- corpo principal -- */
+main#corpoSite {
+    background-color: var(--fundo);
+}
+
 /* -- header -- */
 
 header#topoSite{
@@ -85,22 +90,37 @@ header#topoSite{
 .btns-navegacao{
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
-    gap: 2vw;
+    align-items: center;
+    gap: 1vw;
     
     height: 100%;
 }
 
 .btns-navegacao .btn-nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    
     appearance: none;
     border: none;
+    border-radius: 10px;
+    
     height: 100%;
+    aspect-ratio: 1/1;
     padding: .5vw;
-
+    
     background-color: var(--verde-principal);
     color: var(--fundo);
 }
 
+.btns-navegacao .btn-nav .fa-bag-shopping{
+    font-size: 1.5rem;
+}
+
 .btns-navegacao .btn-nav img{
-    height: 110%;
+    height: 80%;
+    width: auto;
+    object-fit: contain;
 }
