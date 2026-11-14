@@ -1,6 +1,11 @@
 /* -- Seletores principais -- */
 const containerDestaques = document.getElementById("vitrineDestaques");
 const containerCatalogo = document.getElementById("catalogoLivros");
+const inputBusca = document.getElementById("barraPesquisa");
+const botoesFiltro = document.querySelectorAll("#filtros .filtro");
+
+/* -- Estado dos filtros -- */
+let categoriaAtual = "todos";
 
 /* -- Formatação de moeda -- */
 function formatarPreco(valor) {
@@ -8,6 +13,14 @@ function formatarPreco(valor) {
         style: "currency",
         currency: "BRL"
     });
+}
+
+/* -- Normaliza texto para ignorar acentos e maiúsculas -- */
+function normalizarTexto(texto) {
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
 }
 
 /* -- Renderiza o livro do mês no banner -- */
@@ -81,9 +94,53 @@ function renderizarCatalogo(livrosParaExibir = listaLivros) {
     });
 }
 
+/* -- Aplica busca por título/autor e filtro de categoria -- */
+function filtrarLivros() {
+    const termoBusca = normalizarTexto(inputBusca.value.trim());
+
+    const livrosFiltrados = listaLivros.filter((livro) => {
+        const bateCategoria =
+            categoriaAtual === "todos" || livro.categoria === categoriaAtual;
+
+        const tituloNormalizado = normalizarTexto(livro.titulo);
+        const autorNormalizado = normalizarTexto(livro.autor);
+        const bateBusca =
+            tituloNormalizado.includes(termoBusca) ||
+            autorNormalizado.includes(termoBusca);
+
+        return bateCategoria && bateBusca;
+    });
+
+    renderizarCatalogo(livrosFiltrados);
+}
+
+/* -- Configura eventos de busca e categorias -- */
+function configurarFiltros() {
+    inputBusca.addEventListener("input", () => {
+        filtrarLivros();
+
+        if (inputBusca.value.trim().length === 1) {
+            document.getElementById("secaoCatalogo").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    });
+
+    botoesFiltro.forEach((botao) => {
+        botao.addEventListener("click", () => {
+            botoesFiltro.forEach((item) => item.classList.remove("ativo"));
+            botao.classList.add("ativo");
+
+            categoriaAtual = botao.dataset.categoria;
+            filtrarLivros();
+        });
+    });
+}
+
 /* -- Inicialização da página -- */
 document.addEventListener("DOMContentLoaded", () => {
     renderizarBanner();
     renderizarDestaques();
     renderizarCatalogo(listaLivros);
+    configurarFiltros();
 });
