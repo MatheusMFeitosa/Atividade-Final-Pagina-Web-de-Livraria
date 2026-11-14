@@ -6,54 +6,177 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../media/logo.svg" type="image/x-icon">
-    <title>Book-e</title>
+    <title>Book-e | Livraria Online</title>
 </head>
 
 <body>
+    <!-- -- header -- -->
     <header id="topoSite">
         <nav id="menu">
-            <img src="../media/logoTitulo.svg" alt="logo" id="titulo">
+            <a href="#topoSite" class="logo-link">
+                <img src="../media/logoTitulo.svg" alt="Logotipo da livraria Book-e" id="titulo">
+            </a>
+
+            <ul class="links-navegacao" id="linksNavegacao">
+                <li><a href="#topoSite">Início</a></li>
+                <li><a href="#secaoDestaques">Destaques</a></li>
+                <li><a href="#secaoCatalogo">Catálogo</a></li>
+                <li><a href="#secaoContato">Sobre & Contato</a></li>
+            </ul>
 
             <label for="barraPesquisa">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search"name="barra_pesquisa" id="barraPesquisa" placeholder="Sua próxima história..">
+                <input type="search" name="barra_pesquisa" id="barraPesquisa" placeholder="Título ou autor...">
             </label>
 
             <div class="btns-navegacao">
-                <button class="btn-nav"><i class="fa-solid fa-bag-shopping"></i></button>
-                <button class="btn-nav"><img src="../media/catalogo.svg" alt="SVG Catalogo"></button>
+                <button class="btn-nav" id="btnAbrirCarrinho" aria-label="Abrir carrinho de compras">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="contadorCarrinho">0</span>
+                </button>
+                <a href="#secaoCatalogo" class="btn-nav" aria-label="Ir para o catálogo">
+                    <img src="../media/catalogo.svg" alt="Ícone de catálogo">
+                </a>
+                <button class="btn-nav btn-mobile" id="btnMenuMobile" aria-label="Abrir menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </nav>
     </header>
+
+    <!-- -- corpo principal -- -->
     <main id="corpoSite">
+        <!-- -- banner -- -->
         <section class="container-banner">
             <div class="banner">
                 <div id="conteudoBanner">
-                    <h2 class="titulo"></h2>
+                    <span class="tag-destaque">Livro do Mês</span>
+                    <h1 class="titulo">Carregando destaque...</h1>
                     <p class="texto-principal"></p>
-                    <button id="btnAcao"></button>
+                    <button id="btnAcao">Ver detalhes</button>
                 </div>
-                
-                <img src="" alt="Livro Promoção">
+
+                <img src="" alt="Capa do livro em promoção" id="imgBanner">
             </div>
         </section>
 
-        <section class="container-catalogo">
+        <!-- -- vitrine destaques -- -->
+        <section class="container-destaques" id="secaoDestaques">
+            <header class="cabecalho-secao">
+                <h2>Destaques da Semana</h2>
+            </header>
+            <div id="vitrineDestaques" class="grade-livros"></div>
+        </section>
+
+        <!-- -- catálogo -- -->
+        <section class="container-catalogo" id="secaoCatalogo">
             <header id="conteiner_filtros">
                 <h2>Catálogo</h2>
                 <nav id="filtros">
-                    <p class="filtro">Fantasia</p>
-                    <p class="filtro">Ação</p>
-                    <p class="filtro">Suspense</p>
-                    <p class="filtro">Ficção</p>
+                    <p class="filtro ativo" data-categoria="todos"><strong>Todos</strong></p>
+                    <p class="filtro" data-categoria="Fantasia"><strong>Fantasia</strong></p>
+                    <p class="filtro" data-categoria="Ação"><strong>Ação</strong></p>
+                    <p class="filtro" data-categoria="Suspense"><strong>Suspense</strong></p>
+                    <p class="filtro" data-categoria="Ficção"><strong>Ficção</strong></p>
                 </nav>
             </header>
 
-            <main id="catalogoLivros"></main>
+            <div id="catalogoLivros" class="grade-livros"></div>
+        </section>
+
+        <!-- -- sobre e contato -- -->
+        <section class="container-contato" id="secaoContato">
+            <div class="conteudo-contato">
+                <article class="sobre-livraria">
+                    <h2>Sobre a Book-e</h2>
+                    <p>
+                        A Book-e nasceu da paixão por boas histórias. Selecionamos títulos de fantasia,
+                        ação, suspense e ficção científica para conectar leitores a novos mundos,
+                        com curadoria independente e entrega rápida para todo o Brasil.
+                    </p>
+                </article>
+
+                <form id="formContato" class="formulario-contato" novalidate>
+                    <h2>Fale Conosco</h2>
+
+                    <div class="campo-form">
+                        <label for="nomeContato">Nome</label>
+                        <input type="text" id="nomeContato" name="nome" placeholder="Seu nome completo" required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="emailContato">E-mail</label>
+                        <input type="email" id="emailContato" name="email" placeholder="seuemail@exemplo.com" required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="assuntoContato">Assunto</label>
+                        <input type="text" id="assuntoContato" name="assunto" placeholder="Dúvida, sugestão ou pedido" required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="mensagemContato">Mensagem</label>
+                        <textarea id="mensagemContato" name="mensagem" rows="4" placeholder="Escreva sua mensagem..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+                    <p id="feedbackFormulario" class="feedback-form" aria-live="polite"></p>
+                </form>
+            </div>
         </section>
     </main>
 
+    <!-- -- modal detalhes do livro -- -->
+    <aside id="modalDetalhes" class="overlay-modal oculto" aria-hidden="true">
+        <div class="conteudo-modal">
+            <button id="btnFecharDetalhes" class="btn-voltar">
+                <i class="fa-solid fa-arrow-left"></i> Voltar ao catálogo
+            </button>
+            <div id="corpoDetalhes"></div>
+        </div>
+    </aside>
+
+    <!-- -- gaveta carrinho de compras -- -->
+    <aside id="gavetaCarrinho" class="overlay-carrinho oculto" aria-hidden="true">
+        <div class="painel-carrinho">
+            <header class="topo-carrinho">
+                <h2>Seu Carrinho</h2>
+                <button id="btnFecharCarrinho" aria-label="Fechar carrinho">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </header>
+
+            <div id="listaItensCarrinho" class="lista-carrinho"></div>
+
+            <footer class="rodape-carrinho">
+                <div class="total-carrinho">
+                    <span>Total:</span>
+                    <strong id="valorTotalCarrinho">R$ 0,00</strong>
+                </div>
+                <button id="btnFinalizarCompra" class="btn-enviar">Finalizar Compra</button>
+            </footer>
+        </div>
+    </aside>
+
+    <!-- -- rodapé -- -->
+    <footer id="rodapeSite">
+        <div class="conteudo-rodape">
+            <div>
+                <h3>Book-e Livraria</h3>
+            </div>
+
+            <div class="redes-sociais">
+                <a href="#" aria-label="Instagram da Book-e"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter da Book-e"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" aria-label="GitHub do projeto"><i class="fa-brands fa-github"></i></a>
+            </div>
+
+            <p class="direitos">&copy; 2026 Book-e Livraria. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
     <script src="https://kit.fontawesome.com/d02a564654.js" crossorigin="anonymous"></script>
+    <script type="module" src="../js/app.js"></script>
 </body>
 
 </html>
