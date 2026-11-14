@@ -560,3 +560,120 @@ footer#rodapeSite {
 .redes-sociais a:hover {
     color: var(--banner);
 }
+
+/* -- cards de livros -- */
+.card-livro {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: var(--branco);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+
+    transition: var(--transicao);
+}
+
+.card-livro:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(30, 62, 53, 0.18);
+}
+
+.capa-container {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    background-color: var(--banner);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+.capa-livro {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.badge-categoria {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    background-color: var(--verde-escuro);
+    color: var(--fundo);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.info-livro {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding: 16px;
+    gap: 8px;
+}
+
+.titulo-livro {
+    font-size: 1.05rem;
+    color: var(--verde-escuro);
+}
+
+.autor-livro {
+    font-size: 0.88rem;
+    color: var(--cinza);
+}
+
+.rodape-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.preco-livro {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--verde-principal);
+}
+
+.btn-adicionar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--verde-principal);
+    color: var(--fundo);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: var(--transicao);
+}
+
+.btn-adicionar:hover {
+    background-color: var(--verde-escuro);
+}
+
+.mensagem-vazia {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--cinza-escuro);
+    padding: 24px;
+    font-weight: 500;
+}
