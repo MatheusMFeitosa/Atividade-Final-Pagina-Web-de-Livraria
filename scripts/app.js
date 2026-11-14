@@ -1,8 +1,14 @@
 /* -- Seletores principais -- */
+const corpoSite = document.getElementById("corpoSite");
 const containerDestaques = document.getElementById("vitrineDestaques");
 const containerCatalogo = document.getElementById("catalogoLivros");
 const inputBusca = document.getElementById("barraPesquisa");
 const botoesFiltro = document.querySelectorAll("#filtros .filtro");
+
+/* -- Seletores do modal de detalhes -- */
+const modalDetalhes = document.getElementById("modalDetalhes");
+const corpoDetalhes = document.getElementById("corpoDetalhes");
+const btnFecharDetalhes = document.getElementById("btnFecharDetalhes");
 
 /* -- Estado dos filtros -- */
 let categoriaAtual = "todos";
@@ -137,10 +143,98 @@ function configurarFiltros() {
     });
 }
 
+/* -- Abre o modal com os detalhes completos do livro -- */
+function abrirModalDetalhes(idLivro) {
+    const livro = listaLivros.find((item) => item.id === Number(idLivro));
+    if (!livro) return;
+
+    corpoDetalhes.innerHTML = `
+        <article class="detalhes-livro">
+            <div class="detalhes-capa">
+                <img src="${livro.capa}" alt="Capa ampliada do livro ${livro.titulo}">
+            </div>
+
+            <div class="detalhes-info">
+                <span class="detalhes-categoria">${livro.categoria}</span>
+                <h2 class="detalhes-titulo">${livro.titulo}</h2>
+                <p class="detalhes-autor">Por <strong>${livro.autor}</strong></p>
+
+                <p class="detalhes-sinopse">${livro.sinopse}</p>
+
+                <div class="ficha-tecnica">
+                    <div class="item-ficha">
+                        <span>Editora</span>
+                        <strong>${livro.editora}</strong>
+                    </div>
+                    <div class="item-ficha">
+                        <span>Ano</span>
+                        <strong>${livro.ano}</strong>
+                    </div>
+                    <div class="item-ficha">
+                        <span>Páginas</span>
+                        <strong>${livro.paginas} págs.</strong>
+                    </div>
+                </div>
+
+                <div class="detalhes-acoes">
+                    <span class="detalhes-preco">${formatarPreco(livro.preco)}</span>
+                    <button class="btn-adicionar" data-id="${livro.id}">
+                        <i class="fa-solid fa-bag-shopping"></i> Adicionar ao carrinho
+                    </button>
+                </div>
+            </div>
+        </article>
+    `;
+
+    modalDetalhes.classList.remove("oculto");
+    modalDetalhes.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+}
+
+/* -- Fecha o modal de detalhes -- */
+function fecharModalDetalhes() {
+    modalDetalhes.classList.add("oculto");
+    modalDetalhes.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+}
+
+/* -- Configura os eventos de abertura e fechamento do modal -- */
+function configurarModalDetalhes() {
+    corpoSite.addEventListener("click", (evento) => {
+        if (evento.target.closest(".btn-adicionar")) return;
+
+        const btnBanner = evento.target.closest("#btnAcao");
+        if (btnBanner) {
+            abrirModalDetalhes(btnBanner.dataset.id);
+            return;
+        }
+
+        const cardClicado = evento.target.closest(".card-livro");
+        if (cardClicado) {
+            abrirModalDetalhes(cardClicado.dataset.id);
+        }
+    });
+
+    btnFecharDetalhes.addEventListener("click", fecharModalDetalhes);
+
+    modalDetalhes.addEventListener("click", (evento) => {
+        if (evento.target === modalDetalhes) {
+            fecharModalDetalhes();
+        }
+    });
+
+    document.addEventListener("keydown", (evento) => {
+        if (evento.key === "Escape" && !modalDetalhes.classList.contains("oculto")) {
+            fecharModalDetalhes();
+        }
+    });
+}
+
 /* -- Inicialização da página -- */
 document.addEventListener("DOMContentLoaded", () => {
     renderizarBanner();
     renderizarDestaques();
     renderizarCatalogo(listaLivros);
     configurarFiltros();
+    configurarModalDetalhes();
 });

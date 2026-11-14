@@ -677,3 +677,124 @@ footer#rodapeSite {
     padding: 24px;
     font-weight: 500;
 }
+
+/* -- detalhes do livro (modal) -- */
+.detalhes-livro {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+.detalhes-capa {
+    background-color: var(--banner);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detalhes-capa img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.detalhes-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detalhes-categoria {
+    align-self: flex-start;
+    background-color: var(--verde-escuro);
+    color: var(--fundo);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.detalhes-titulo {
+    font-size: 1.6rem;
+    color: var(--verde-escuro);
+}
+
+.detalhes-autor {
+    font-size: 1rem;
+    color: var(--cinza);
+    font-weight: 500;
+}
+
+.detalhes-sinopse {
+    color: var(--cinza-escuro);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 4px 0;
+}
+
+.ficha-tecnica {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    background-color: var(--fundo);
+    padding: 14px;
+    border-radius: 10px;
+    margin: 6px 0;
+}
+
+.item-ficha {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-ficha span {
+    font-size: 0.78rem;
+    color: var(--cinza);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.item-ficha strong {
+    font-size: 0.92rem;
+    color: var(--verde-escuro);
+}
+
+.detalhes-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 8px;
+    padding-top: 14px;
+    border-top: 1px solid var(--banner);
+}
+
+.detalhes-preco {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--verde-principal);
+}
+
+.detalhes-acoes .btn-adicionar {
+    width: auto;
+    padding: 12px 24px;
+    font-size: 0.95rem;
+}
+
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transicao);
+}
+
+.btn-voltar:hover {
+    color: var(--verde-escuro);
+    transform: translateX(-4px);
+}
