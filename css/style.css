@@ -4,6 +4,9 @@
     box-sizing: border-box;
 }
 
+/* ================================
+   PALETA BASE (fixa, não muda com o tema)
+================================ */
 :root {
     --preto: #040303;
     --verde-escuro: #1E3E35;
@@ -13,22 +16,95 @@
     --banner: #B7BDAE;
     --fundo: #E2DDD9;
     --branco: #F7F5F3;
-    --erro: #dc3545;
-    --sucesso: #198754;
 
     --transicao: all 0.3s ease-in-out;
+
+    /* ---- TOKENS SEMÂNTICOS (tema claro) ---- */
+    --bg-pagina: #E2DDD9;
+    --bg-superficie: #F7F5F3;      /* cards, modal, carrinho, contato */
+    --bg-header: #1E3E35;          /* header e rodapé */
+    --bg-banner: #B7BDAE;          /* banner e área da capa */
+    --bg-busca: #E2DDD9;
+    --bg-input: #F7F5F3;
+    --bg-ficha: #E2DDD9;
+
+    --texto: #040303;
+    --texto-titulo: #1E3E35;
+    --texto-suave: #3A4E48;
+    --texto-mudo: #6A7B76;
+    --texto-header: #F7F5F3;
+    --texto-acento: #387966;       /* preços, links de destaque */
+
+    --btn-bg: #387966;
+    --btn-bg-hover: #1E3E35;
+    --btn-texto: #F7F5F3;
+
+    --tag-bg: #1E3E35;
+    --tag-texto: #F7F5F3;
+
+    --borda: #B7BDAE;
+    --sombra: rgba(0, 0, 0, 0.12);
+    --sombra-forte: rgba(30, 62, 53, 0.18);
+    --overlay: rgba(4, 3, 3, 0.6);
+
+    --erro: #dc3545;
+    --erro-hover: #a71d2a;
+    --sucesso: #198754;
+
+    color-scheme: light;
+}
+
+/* ================================
+   MODO ESCURO
+   (só os tokens semânticos mudam)
+================================ */
+:root[data-tema="escuro"] {
+    --bg-pagina: #101B17;
+    --bg-superficie: #1B2923;
+    --bg-header: #142B25;
+    --bg-banner: #243A32;
+    --bg-busca: #1B2923;
+    --bg-input: #131F1A;
+    --bg-ficha: #131F1A;
+
+    --texto: #EDEAE6;
+    --texto-titulo: #CFE6DC;
+    --texto-suave: #C2CCC7;
+    --texto-mudo: #9AABA4;
+    --texto-header: #F7F5F3;
+    --texto-acento: #6FC3A4;
+
+    --btn-bg: #387966;
+    --btn-bg-hover: #4F9B80;
+    --btn-texto: #F7F5F3;
+
+    --tag-bg: #387966;
+    --tag-texto: #F7F5F3;
+
+    --borda: #2E453C;
+    --sombra: rgba(0, 0, 0, 0.45);
+    --sombra-forte: rgba(0, 0, 0, 0.6);
+    --overlay: rgba(0, 0, 0, 0.75);
+
+    --erro: #FF6B7A;
+    --erro-hover: #FF8F9B;
+    --sucesso: #4CC38A;
+
+    color-scheme: dark;
 }
 
 html {
     scroll-behavior: smooth;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-pagina);
 }
 
 /* -- corpo principal -- */
 main#corpoSite {
-    background-color: var(--fundo);
-    color: var(--preto);
+    background-color: var(--bg-pagina);
+    color: var(--texto);
     padding-bottom: 60px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* -- header -- */
@@ -45,8 +121,8 @@ header#topoSite {
     height: 10vh;
     min-height: 64px;
 
-    background-color: var(--verde-escuro);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    background-color: var(--bg-header);
+    box-shadow: 0 2px 10px var(--sombra);
 }
 
 #menu {
@@ -72,7 +148,7 @@ header#topoSite {
 }
 
 .links-navegacao a {
-    color: var(--fundo);
+    color: var(--texto-header);
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
@@ -94,14 +170,14 @@ header#topoSite {
     height: 38px;
     padding: 0 12px;
 
-    background-color: var(--fundo);
+    background-color: var(--bg-busca);
     border-radius: 10px;
     cursor: pointer;
 }
 
 #menu label i {
     font-size: 0.85rem;
-    color: var(--preto);
+    color: var(--texto);
 }
 
 #menu label #barraPesquisa {
@@ -114,12 +190,12 @@ header#topoSite {
     outline: none;
 
     font-size: 0.85rem;
-    color: var(--preto);
+    color: var(--texto);
 }
 
 #menu label #barraPesquisa::placeholder {
-    color: var(--preto);
-    opacity: 0.7;
+    color: var(--texto-mudo);
+    opacity: 1;
 }
 
 /* -- botões header -- */
@@ -146,8 +222,8 @@ header#topoSite {
     border-radius: 10px;
     text-decoration: none;
 
-    background-color: var(--verde-principal);
-    color: var(--fundo);
+    background-color: var(--btn-bg);
+    color: var(--btn-texto);
 
     transition: var(--transicao);
 }
@@ -172,7 +248,7 @@ header#topoSite {
     top: -6px;
     right: -6px;
 
-    background-color: var(--fundo);
+    background-color: var(--branco);
     color: var(--verde-escuro);
     font-size: 0.72rem;
     font-weight: 700;
@@ -210,9 +286,9 @@ header#topoSite {
     min-height: 320px;
     padding: 32px 48px;
 
-    background-color: var(--banner);
+    background-color: var(--bg-banner);
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px var(--sombra);
 }
 
 #conteudoBanner {
@@ -224,8 +300,8 @@ header#topoSite {
 }
 
 .tag-destaque {
-    background-color: var(--verde-escuro);
-    color: var(--fundo);
+    background-color: var(--tag-bg);
+    color: var(--tag-texto);
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -234,11 +310,11 @@ header#topoSite {
 
 #conteudoBanner .titulo {
     font-size: 2rem;
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
 }
 
 #conteudoBanner .texto-principal {
-    color: var(--cinza-escuro);
+    color: var(--texto-suave);
     line-height: 1.5;
 }
 
@@ -246,15 +322,15 @@ header#topoSite {
     padding: 10px 22px;
     border: none;
     border-radius: 10px;
-    background-color: var(--verde-principal);
-    color: var(--fundo);
+    background-color: var(--btn-bg);
+    color: var(--btn-texto);
     font-weight: 600;
     cursor: pointer;
     transition: var(--transicao);
 }
 
 #btnAcao:hover {
-    background-color: var(--verde-escuro);
+    background-color: var(--btn-bg-hover);
     transform: translateY(-2px);
 }
 
@@ -262,7 +338,7 @@ header#topoSite {
     max-height: 240px;
     width: auto;
     border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px var(--sombra);
 }
 
 /* -- seções destaques e catálogo -- */
@@ -275,7 +351,7 @@ header#topoSite {
 
     width: 100%;
     padding: 30px 20px;
-    color: var(--verde-principal);
+    color: var(--texto-acento);
 }
 
 .cabecalho-secao,
@@ -290,7 +366,7 @@ header#conteiner_filtros {
 #conteiner_filtros h2 {
     position: relative;
     padding-bottom: 6px;
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
 }
 
 .cabecalho-secao h2::after,
@@ -301,7 +377,7 @@ header#conteiner_filtros {
     bottom: 0;
     width: 70px;
     height: 3px;
-    background-color: var(--verde-principal);
+    background-color: var(--texto-acento);
     border-radius: 5px;
 }
 
@@ -325,14 +401,14 @@ nav#filtros .filtro::after {
     bottom: 0;
     width: 0;
     height: 2px;
-    background-color: var(--verde-escuro);
+    background-color: var(--texto-titulo);
     border-radius: 2px;
     transition: width 0.3s ease;
 }
 
 nav#filtros .filtro:hover,
 nav#filtros .filtro.ativo {
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
 }
 
 nav#filtros .filtro:hover::after,
@@ -361,20 +437,20 @@ nav#filtros .filtro.ativo::after {
     grid-template-columns: 1fr 1.2fr;
     gap: 40px;
 
-    background-color: var(--branco);
+    background-color: var(--bg-superficie);
     padding: 36px;
     border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 20px var(--sombra);
 }
 
 .sobre-livraria h2,
 .formulario-contato h2 {
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
     margin-bottom: 14px;
 }
 
 .sobre-livraria p {
-    color: var(--cinza-escuro);
+    color: var(--texto-suave);
     line-height: 1.6;
 }
 
@@ -393,39 +469,46 @@ nav#filtros .filtro.ativo::after {
 .campo-form label {
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
 }
 
 .campo-form input,
 .campo-form textarea {
     padding: 10px 12px;
-    border: 1px solid var(--banner);
+    border: 1px solid var(--borda);
     border-radius: 8px;
-    background-color: var(--fundo);
+    background-color: var(--bg-input);
+    color: var(--texto);
     font-family: inherit;
     font-size: 0.95rem;
     outline: none;
     transition: var(--transicao);
 }
 
+.campo-form input::placeholder,
+.campo-form textarea::placeholder {
+    color: var(--texto-mudo);
+    opacity: 1;
+}
+
 .campo-form input:focus,
 .campo-form textarea:focus {
-    border-color: var(--verde-principal);
+    border-color: var(--texto-acento);
 }
 
 .btn-enviar {
     padding: 12px 20px;
     border: none;
     border-radius: 10px;
-    background-color: var(--verde-principal);
-    color: var(--fundo);
+    background-color: var(--btn-bg);
+    color: var(--btn-texto);
     font-weight: 600;
     cursor: pointer;
     transition: var(--transicao);
 }
 
 .btn-enviar:hover {
-    background-color: var(--verde-escuro);
+    background-color: var(--btn-bg-hover);
 }
 
 .feedback-form {
@@ -433,7 +516,6 @@ nav#filtros .filtro.ativo::after {
     font-weight: 600;
     min-height: 20px;
 }
-
 
 /* Campo com erro */
 .campo-form input.campo-invalido,
@@ -475,7 +557,7 @@ nav#filtros .filtro.ativo::after {
     position: fixed;
     inset: 0;
     z-index: 200;
-    background-color: rgba(4, 3, 3, 0.6);
+    background-color: var(--overlay);
     display: flex;
 
     transition: var(--transicao);
@@ -488,7 +570,8 @@ nav#filtros .filtro.ativo::after {
 }
 
 .conteudo-modal {
-    background-color: var(--branco);
+    background-color: var(--bg-superficie);
+    color: var(--texto);
     width: 100%;
     max-width: 780px;
     max-height: 90vh;
@@ -500,7 +583,7 @@ nav#filtros .filtro.ativo::after {
 .btn-voltar {
     background: none;
     border: none;
-    color: var(--verde-principal);
+    color: var(--texto-acento);
     font-weight: 600;
     cursor: pointer;
     margin-bottom: 18px;
@@ -515,7 +598,8 @@ nav#filtros .filtro.ativo::after {
     width: 100%;
     max-width: 400px;
     height: 100%;
-    background-color: var(--branco);
+    background-color: var(--bg-superficie);
+    color: var(--texto);
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -526,9 +610,9 @@ nav#filtros .filtro.ativo::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--banner);
+    border-bottom: 1px solid var(--borda);
     padding-bottom: 12px;
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
 }
 
 .topo-carrinho button {
@@ -536,7 +620,7 @@ nav#filtros .filtro.ativo::after {
     border: none;
     font-size: 1.3rem;
     cursor: pointer;
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
 }
 
 .lista-carrinho {
@@ -549,7 +633,7 @@ nav#filtros .filtro.ativo::after {
 }
 
 .rodape-carrinho {
-    border-top: 1px solid var(--banner);
+    border-top: 1px solid var(--borda);
     padding-top: 16px;
     display: flex;
     flex-direction: column;
@@ -560,7 +644,7 @@ nav#filtros .filtro.ativo::after {
     display: flex;
     justify-content: space-between;
     font-size: 1.1rem;
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
 }
 
 .subtotal-item {
@@ -571,7 +655,7 @@ nav#filtros .filtro.ativo::after {
 
 .mensagem-carrinho-vazio {
     text-align: center;
-    color: #777;
+    color: var(--texto-mudo);
     padding: 30px 10px;
 }
 
@@ -582,7 +666,7 @@ nav#filtros .filtro.ativo::after {
     align-items: center;
     gap: 15px;
     padding: 16px 0;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid var(--borda);
 }
 
 /* Imagem do livro */
@@ -606,12 +690,13 @@ nav#filtros .filtro.ativo::after {
     font-size: 15px;
     font-weight: 600;
     margin: 0;
+    color: var(--texto);
 }
 
 .preco-item {
     font-size: 14px;
     font-weight: 600;
-    color: #333;
+    color: var(--texto);
 }
 
 /* Quantidade */
@@ -624,16 +709,24 @@ nav#filtros .filtro.ativo::after {
 .controles-quantidade button {
     width: 28px;
     height: 28px;
-    border: 1px solid #ddd;
-    background: #fff;
+    border: 1px solid var(--borda);
+    background-color: var(--bg-superficie);
     border-radius: 5px;
     cursor: pointer;
     font-size: 17px;
+    color: var(--texto);
+    transition: var(--transicao);
+}
+
+.controles-quantidade button:hover {
+    background-color: var(--bg-input);
+    border-color: var(--texto-acento);
 }
 
 .quantidade-item {
     font-size: 14px;
     font-weight: 600;
+    color: var(--texto);
 }
 
 /* Remover */
@@ -647,14 +740,14 @@ nav#filtros .filtro.ativo::after {
 }
 
 .btn-remover:hover {
-    color: #a71d2a;
+    color: var(--erro-hover);
 }
 
 
 /* -- rodapé -- */
 footer#rodapeSite {
-    background-color: var(--verde-escuro);
-    color: var(--fundo);
+    background-color: var(--bg-header);
+    color: var(--texto-header);
     padding: 32px 20px;
     display: flex;
     justify-content: center;
@@ -675,7 +768,7 @@ footer#rodapeSite {
 }
 
 .redes-sociais a {
-    color: var(--fundo);
+    color: var(--texto-header);
     font-size: 1.3rem;
     transition: var(--transicao);
 }
@@ -690,10 +783,10 @@ footer#rodapeSite {
     flex-direction: column;
     justify-content: space-between;
 
-    background-color: var(--branco);
+    background-color: var(--bg-superficie);
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 16px var(--sombra);
     cursor: pointer;
 
     transition: var(--transicao);
@@ -701,14 +794,14 @@ footer#rodapeSite {
 
 .card-livro:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(30, 62, 53, 0.18);
+    box-shadow: 0 12px 24px var(--sombra-forte);
 }
 
 .capa-container {
     position: relative;
     width: 100%;
     height: 260px;
-    background-color: var(--banner);
+    background-color: var(--bg-banner);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -721,7 +814,7 @@ footer#rodapeSite {
     max-width: 100%;
     object-fit: contain;
     border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .badge-categoria {
@@ -729,8 +822,8 @@ footer#rodapeSite {
     top: 12px;
     left: 12px;
 
-    background-color: var(--verde-escuro);
-    color: var(--fundo);
+    background-color: var(--tag-bg);
+    color: var(--tag-texto);
     font-size: 0.75rem;
     font-weight: 600;
     padding: 4px 10px;
@@ -748,12 +841,12 @@ footer#rodapeSite {
 
 .titulo-livro {
     font-size: 1.05rem;
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
 }
 
 .autor-livro {
     font-size: 0.88rem;
-    color: var(--cinza);
+    color: var(--texto-mudo);
 }
 
 .rodape-card {
@@ -766,7 +859,7 @@ footer#rodapeSite {
 .preco-livro {
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--verde-principal);
+    color: var(--texto-acento);
 }
 
 .btn-adicionar {
@@ -780,8 +873,8 @@ footer#rodapeSite {
     border: none;
     border-radius: 8px;
 
-    background-color: var(--verde-principal);
-    color: var(--fundo);
+    background-color: var(--btn-bg);
+    color: var(--btn-texto);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
@@ -790,13 +883,13 @@ footer#rodapeSite {
 }
 
 .btn-adicionar:hover {
-    background-color: var(--verde-escuro);
+    background-color: var(--btn-bg-hover);
 }
 
 .mensagem-vazia {
     grid-column: 1 / -1;
     text-align: center;
-    color: var(--cinza-escuro);
+    color: var(--texto-suave);
     padding: 24px;
     font-weight: 500;
 }
@@ -810,7 +903,7 @@ footer#rodapeSite {
 }
 
 .detalhes-capa {
-    background-color: var(--banner);
+    background-color: var(--bg-banner);
     border-radius: 12px;
     padding: 20px;
     display: flex;
@@ -823,7 +916,7 @@ footer#rodapeSite {
     max-width: 200px;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .detalhes-info {
@@ -834,8 +927,8 @@ footer#rodapeSite {
 
 .detalhes-categoria {
     align-self: flex-start;
-    background-color: var(--verde-escuro);
-    color: var(--fundo);
+    background-color: var(--tag-bg);
+    color: var(--tag-texto);
     font-size: 0.78rem;
     font-weight: 600;
     padding: 4px 12px;
@@ -844,17 +937,17 @@ footer#rodapeSite {
 
 .detalhes-titulo {
     font-size: 1.6rem;
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
 }
 
 .detalhes-autor {
     font-size: 1rem;
-    color: var(--cinza);
+    color: var(--texto-mudo);
     font-weight: 500;
 }
 
 .detalhes-sinopse {
-    color: var(--cinza-escuro);
+    color: var(--texto-suave);
     line-height: 1.6;
     font-size: 0.95rem;
     margin: 4px 0;
@@ -864,7 +957,7 @@ footer#rodapeSite {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    background-color: var(--fundo);
+    background-color: var(--bg-ficha);
     padding: 14px;
     border-radius: 10px;
     margin: 6px 0;
@@ -878,14 +971,14 @@ footer#rodapeSite {
 
 .item-ficha span {
     font-size: 0.78rem;
-    color: var(--cinza);
+    color: var(--texto-mudo);
     text-transform: uppercase;
     font-weight: 600;
 }
 
 .item-ficha strong {
     font-size: 0.92rem;
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
 }
 
 .detalhes-acoes {
@@ -895,13 +988,13 @@ footer#rodapeSite {
     gap: 20px;
     margin-top: 8px;
     padding-top: 14px;
-    border-top: 1px solid var(--banner);
+    border-top: 1px solid var(--borda);
 }
 
 .detalhes-preco {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--verde-principal);
+    color: var(--texto-acento);
 }
 
 .detalhes-acoes .btn-adicionar {
@@ -918,7 +1011,7 @@ footer#rodapeSite {
 }
 
 .btn-voltar:hover {
-    color: var(--verde-escuro);
+    color: var(--texto-titulo);
     transform: translateX(-4px);
 }
 
@@ -1016,9 +1109,9 @@ footer#rodapeSite {
         align-items: stretch;
         gap: 0;
 
-        background-color: var(--verde-escuro);
+        background-color: var(--bg-header);
         border-radius: 10px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 20px var(--sombra);
     }
 
     /* Classe adicionada pelo JavaScript */

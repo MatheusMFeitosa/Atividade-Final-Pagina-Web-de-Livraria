@@ -30,13 +30,19 @@
             </label>
 
             <div class="btns-navegacao">
+                <button class="btn-nav" id="btnTema" aria-label="Ativar modo escuro">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <a href="#secaoCatalogo" class="btn-nav" aria-label="Ir para o catálogo">
+                    <img src="../media/catalogo.svg" alt="Ícone de catálogo">
+                </a>
+
                 <button class="btn-nav" id="btnAbrirCarrinho" aria-label="Abrir carrinho de compras">
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span id="contadorCarrinho">0</span>
                 </button>
-                <a href="#secaoCatalogo" class="btn-nav" aria-label="Ir para o catálogo">
-                    <img src="../media/catalogo.svg" alt="Ícone de catálogo">
-                </a>
+
                 <button class="btn-nav btn-mobile" id="btnMenuMobile" aria-label="Abrir menu" aria-expanded="false">
                     <i class="fa-solid fa-bars"></i>
                 </button>
@@ -184,6 +190,7 @@
     <script src="../scripts/carrinho.js"></script>
     <script src="../scripts/validacaoContato.js"></script>
     <script src="../scripts/menuMobile.js"></script>
+    <script src="../scripts/tema.js"></script>
 </body>
 
 </html>
