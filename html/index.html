@@ -10,9 +10,11 @@
 </head>
 
 <body>
-    <!-- -- header -- -->
+
+    <!-- HEADER -->
     <header id="topoSite">
         <nav id="menu">
+
             <a href="#" class="logo-link">
                 <img src="../media/logoTitulo.svg" alt="Logotipo da livraria Book-e" id="titulo">
             </a>
@@ -21,24 +23,27 @@
                 <li><a href="#">Início</a></li>
                 <li><a href="#secaoDestaques">Destaques</a></li>
                 <li><a href="#secaoCatalogo">Catálogo</a></li>
+                <li><a href="#secaoFavoritos">Minha Lista</a></li>
+                <li><a href="#secaoDescobrir">Descobrir</a></li>
                 <li><a href="#secaoContato">Sobre & Contato</a></li>
             </ul>
 
             <label for="barraPesquisa">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" name="barra_pesquisa" id="barraPesquisa" placeholder="Título ou autor...">
+                <input type="search" id="barraPesquisa" placeholder="Título ou autor...">
             </label>
 
             <div class="btns-navegacao">
+
                 <button class="btn-nav" id="btnTema" aria-label="Ativar modo escuro">
                     <i class="fa-solid fa-moon"></i>
                 </button>
 
                 <a href="#secaoCatalogo" class="btn-nav" aria-label="Ir para o catálogo">
-                    <img src="../media/catalogo.svg" alt="Ícone de catálogo">
+                    <img src="../media/catalogo.svg" alt="Catálogo">
                 </a>
 
-                <button class="btn-nav" id="btnAbrirCarrinho" aria-label="Abrir carrinho de compras">
+                <button class="btn-nav" id="btnAbrirCarrinho" aria-label="Abrir carrinho">
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span id="contadorCarrinho">0</span>
                 </button>
@@ -46,15 +51,18 @@
                 <button class="btn-nav btn-mobile" id="btnMenuMobile" aria-label="Abrir menu" aria-expanded="false">
                     <i class="fa-solid fa-bars"></i>
                 </button>
+
             </div>
         </nav>
     </header>
 
-    <!-- -- corpo principal -- -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main id="corpoSite">
-        <!-- -- banner -- -->
+
+        <!-- BANNER -->
         <section class="container-banner">
             <div class="banner">
+
                 <div id="conteudoBanner">
                     <span class="tag-destaque">Livro do Mês</span>
                     <h1 class="titulo">Carregando destaque...</h1>
@@ -63,46 +71,118 @@
                 </div>
 
                 <img src="" alt="Capa do livro em promoção" id="imgBanner">
+
             </div>
         </section>
 
-        <!-- -- vitrine destaques -- -->
+        <!-- DESTAQUES -->
         <section class="container-destaques" id="secaoDestaques">
+
             <header class="cabecalho-secao">
                 <h2>Destaques da Semana</h2>
             </header>
+
             <div id="vitrineDestaques" class="grade-livros"></div>
+
         </section>
 
-        <!-- -- catálogo -- -->
+        <!-- CATÁLOGO -->
         <section class="container-catalogo" id="secaoCatalogo">
+
             <header id="conteiner_filtros">
+
                 <h2>Catálogo</h2>
+
                 <nav id="filtros">
-                    <p class="filtro ativo" data-categoria="todos"><strong>Todos</strong></p>
-                    <p class="filtro" data-categoria="Fantasia"><strong>Fantasia</strong></p>
-                    <p class="filtro" data-categoria="Ação"><strong>Ação</strong></p>
-                    <p class="filtro" data-categoria="Suspense"><strong>Suspense</strong></p>
-                    <p class="filtro" data-categoria="Ficção"><strong>Ficção</strong></p>
+                    <p class="filtro ativo" data-categoria="todos">
+                        <strong>Todos</strong>
+                    </p>
+
+                    <p class="filtro" data-categoria="Fantasia">
+                        <strong>Fantasia</strong>
+                    </p>
+
+                    <p class="filtro" data-categoria="Ação">
+                        <strong>Ação</strong>
+                    </p>
+
+                    <p class="filtro" data-categoria="Suspense">
+                        <strong>Suspense</strong>
+                    </p>
+
+                    <p class="filtro" data-categoria="Ficção">
+                        <strong>Ficção</strong>
+                    </p>
                 </nav>
+
             </header>
 
             <div id="catalogoLivros" class="grade-livros"></div>
+
         </section>
 
-        <!-- -- sobre e contato -- -->
+        <!-- FAVORITOS -->
+        <section class="container-favoritos" id="secaoFavoritos">
+
+            <header class="cabecalho-secao">
+                <div>
+                    <h2>Minha Lista</h2>
+                    <p id="resumoFavoritos"></p>
+                </div>
+            </header>
+
+            <div id="gradeFavoritos" class="grade-livros"></div>
+
+        </section>
+
+        <!-- GOOGLE BOOKS -->
+        <section class="container-descobrir" id="secaoDescobrir">
+
+            <header class="cabecalho-descobrir">
+                <div>
+                    <h2 id="tituloDescobrir">Descobrir Novos Livros</h2>
+                    <p>Explore novos títulos através da Google Books.</p>
+                </div>
+            </header>
+
+            <form id="formBuscaAPI" class="form-busca-api">
+                <input type="search" id="inputBuscaAPI" placeholder="Pesquisar livros, autores ou assuntos...">
+
+                <button type="submit" class="btn-enviar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Pesquisar
+                </button>
+            </form>
+
+            <div id="statusDescobrir" class="status-api oculto" aria-live="polite"></div>
+
+            <div id="gradeDescobrir" class="grade-livros"></div>
+
+            <button id="btnVerMais" class="btn-ver-mais oculto">
+                Ver mais livros
+            </button>
+
+        </section>
+
+        <!-- SOBRE E CONTATO -->
         <section class="container-contato" id="secaoContato">
+
             <div class="conteudo-contato">
+
                 <article class="sobre-livraria">
                     <h2>Sobre a Book-e</h2>
+
                     <p>
-                        A Book-e nasceu da paixão por boas histórias. Selecionamos títulos de fantasia,
-                        ação, suspense e ficção científica para conectar leitores a novos mundos,
-                        com curadoria independente e entrega rápida para todo o Brasil.
+                        A Book-e nasceu da paixão por boas histórias.
+                        Selecionamos títulos de fantasia, ação, suspense
+                        e ficção científica para conectar leitores a
+                        novos mundos, com curadoria independente e
+                        entrega rápida para todo o Brasil.
                     </p>
                 </article>
 
                 <form id="formContato" class="formulario-contato" novalidate>
+
                     <h2>Fale Conosco</h2>
 
                     <div class="campo-form">
@@ -127,70 +207,232 @@
                             required></textarea>
                     </div>
 
-                    <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+                    <button type="submit" class="btn-enviar">
+                        Enviar Mensagem
+                    </button>
+
                     <p id="feedbackFormulario" class="feedback-form" aria-live="polite"></p>
+
                 </form>
+
             </div>
         </section>
+
     </main>
 
-    <!-- -- modal detalhes do livro -- -->
+    <!-- MODAL DE DETALHES -->
     <aside id="modalDetalhes" class="overlay-modal oculto" aria-hidden="true">
+
         <div class="conteudo-modal">
+
             <button id="btnFecharDetalhes" class="btn-voltar">
-                <i class="fa-solid fa-arrow-left"></i> Voltar ao catálogo
+                <i class="fa-solid fa-arrow-left"></i>
+                Voltar ao catálogo
             </button>
+
             <div id="corpoDetalhes"></div>
+
         </div>
     </aside>
 
-    <!-- -- gaveta carrinho de compras -- -->
+    <!-- CARRINHO -->
     <aside id="gavetaCarrinho" class="overlay-carrinho oculto" aria-hidden="true">
+
         <div class="painel-carrinho">
+
             <header class="topo-carrinho">
                 <h2>Seu Carrinho</h2>
+
                 <button id="btnFecharCarrinho" aria-label="Fechar carrinho">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </header>
 
-            <div id="listaItensCarrinho" class="lista-carrinho">
-            </div>
+            <div id="listaItensCarrinho" class="lista-carrinho"></div>
 
             <footer class="rodape-carrinho">
+
                 <div class="total-carrinho">
                     <span>Total:</span>
                     <strong id="valorTotalCarrinho">R$ 0,00</strong>
                 </div>
-                <button id="btnFinalizarCompra" class="btn-enviar">Finalizar Compra</button>
+
+                <button id="btnFinalizarCompra" class="btn-enviar">
+                    Finalizar Compra
+                </button>
+
             </footer>
+
         </div>
     </aside>
 
-    <!-- -- rodapé -- -->
+    <!-- CHECKOUT -->
+    <aside id="modalCheckout" class="overlay-modal oculto" aria-hidden="true">
+
+        <div class="conteudo-modal checkout-modal">
+
+            <header class="topo-checkout">
+                <h2 id="tituloCheckout">Finalizar Compra</h2>
+
+                <button type="button" id="btnFecharCheckout" aria-label="Voltar ao carrinho">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Voltar ao carrinho
+                </button>
+            </header>
+
+            <!-- FORMULÁRIO -->
+            <div id="etapaFormulario">
+
+                <div class="resumo-checkout">
+                    <h3>Resumo do pedido</h3>
+
+                    <div id="resumoItensCheckout"></div>
+
+                    <div class="linha-resumo">
+                        <span>Subtotal</span>
+                        <strong id="subtotalCheckout">R$ 0,00</strong>
+                    </div>
+
+                    <div class="linha-resumo">
+                        <span>Frete</span>
+                        <strong id="freteCheckout">R$ 0,00</strong>
+                    </div>
+
+                    <div class="linha-resumo linha-total-checkout">
+                        <span>Total</span>
+                        <strong id="totalCheckout">R$ 0,00</strong>
+                    </div>
+                </div>
+
+                <form id="formCheckout" class="formulario-checkout" novalidate>
+
+                    <h3>Dados pessoais</h3>
+
+                    <div class="campo-form">
+                        <label for="nomeCheckout">Nome completo</label>
+                        <input type="text" id="nomeCheckout" placeholder="Seu nome completo" required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="emailCheckout">E-mail</label>
+                        <input type="email" id="emailCheckout" placeholder="seuemail@exemplo.com" required>
+                    </div>
+
+                    <h3>Endereço de entrega</h3>
+
+                    <div class="campo-form">
+                        <label for="cepCheckout">CEP</label>
+                        <input type="text" id="cepCheckout" placeholder="00000-000" maxlength="9" inputmode="numeric"
+                            required>
+                        <small id="statusCep" aria-live="polite"></small>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="ruaCheckout">Rua</label>
+                        <input type="text" id="ruaCheckout" placeholder="Rua / Avenida" required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="numeroCheckout">Número</label>
+                        <input type="text" id="numeroCheckout" placeholder="Número da residência" required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="complementoCheckout">Complemento</label>
+                        <input type="text" id="complementoCheckout" placeholder="Apartamento, bloco, etc.">
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="bairroCheckout">Bairro</label>
+                        <input type="text" id="bairroCheckout" placeholder="Bairro" required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="cidadeCheckout">Cidade</label>
+                        <input type="text" id="cidadeCheckout" placeholder="Cidade" required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="ufCheckout">Estado (UF)</label>
+                        <input type="text" id="ufCheckout" placeholder="SP" maxlength="2" required>
+                    </div>
+
+                    <h3>Forma de pagamento</h3>
+
+                    <div class="campo-form">
+                        <label for="pagamentoCheckout">Pagamento</label>
+
+                        <select id="pagamentoCheckout" required>
+                            <option value="">Selecione uma opção</option>
+                            <option value="Pix">Pix (simulado)</option>
+                            <option value="Cartão de crédito">
+                                Cartão de crédito (simulado)
+                            </option>
+                            <option value="Boleto">Boleto (simulado)</option>
+                        </select>
+                    </div>
+
+                    <p id="feedbackCheckout" class="feedback-form" aria-live="polite"></p>
+
+                    <button type="submit" id="btnConfirmarPedido" class="btn-enviar">
+                        Confirmar pedido
+                    </button>
+
+                </form>
+            </div>
+
+            <!-- CONFIRMAÇÃO -->
+            <div id="etapaConfirmacao" class="etapa-confirmacao oculto" aria-live="polite"></div>
+
+        </div>
+    </aside>
+
+    <!-- RODAPÉ -->
     <footer id="rodapeSite">
+
         <div class="conteudo-rodape">
+
             <div>
                 <h3>Book-e Livraria</h3>
             </div>
 
             <div class="redes-sociais">
-                <a href="#" aria-label="Instagram da Book-e"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" aria-label="Twitter da Book-e"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#" aria-label="GitHub do projeto"><i class="fa-brands fa-github"></i></a>
+                <a href="#" aria-label="Instagram da Book-e">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="Twitter da Book-e">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+
+                <a href="#" aria-label="GitHub do projeto">
+                    <i class="fa-brands fa-github"></i>
+                </a>
             </div>
 
-            <p class="direitos">&copy; 2026 Book-e Livraria. Todos os direitos reservados.</p>
+            <p class="direitos">
+                &copy; 2026 Book-e Livraria. Todos os direitos reservados.
+            </p>
+
         </div>
     </footer>
 
+    <!-- SCRIPTS -->
+
     <script src="https://kit.fontawesome.com/d02a564654.js" crossorigin="anonymous"></script>
+
     <script src="../scripts/livros.js"></script>
+    <script src="../scripts/api.js"></script>
     <script src="../scripts/app.js"></script>
+    <script src="../scripts/favoritos.js"></script>
     <script src="../scripts/carrinho.js"></script>
     <script src="../scripts/validacaoContato.js"></script>
+    <script src="../scripts/checkout.js"></script>
+    <script src="../scripts/descobrir.js"></script>
     <script src="../scripts/menuMobile.js"></script>
     <script src="../scripts/tema.js"></script>
+
+
 </body>
 
 </html>

@@ -1,147 +1,205 @@
 
-/** -- Seletores principais -- **/
-const gavetaCarrinho = document.getElementById("gavetaCarrinho");
-const listaItensCarrinho = document.getElementById("listaItensCarrinho");
-const btnAbrirCarrinho = document.getElementById("btnAbrirCarrinho");
-const valorTotalCarrinho = document.getElementById("valorTotalCarrinho");
+/* ==========================================
+   CARRINHO DE COMPRAS
+========================================== */
 
-const btnFecharCarrinho = document.getElementById("btnFecharCarrinho");
-const iconeContadorCarrinho = document.getElementById("contadorCarrinho");
+/* Seletores */
+const gavetaCarrinho =
+    document.getElementById("gavetaCarrinho");
 
-/** -- Chave do localStorage -- **/
+const listaItensCarrinho =
+    document.getElementById("listaItensCarrinho");
+
+const btnAbrirCarrinho =
+    document.getElementById("btnAbrirCarrinho");
+
+const btnFecharCarrinho =
+    document.getElementById("btnFecharCarrinho");
+
+const btnFinalizarCompra =
+    document.getElementById("btnFinalizarCompra");
+
+const valorTotalCarrinho =
+    document.getElementById("valorTotalCarrinho");
+
+const iconeContadorCarrinho =
+    document.getElementById("contadorCarrinho");
+
+/* LocalStorage */
 const CHAVE_CARRINHO = "bookE_carrinho";
 
-/** -- Estado do carrinho -- **/
+/* Estado */
 let carrinho = [];
 
-/** -- Inicializa o localStorage -- **/
+/* ==========================================
+   INICIALIZAÇÃO
+========================================== */
+
 function iniciarLocalStorage() {
-    const dadosSalvos = localStorage.getItem(CHAVE_CARRINHO);
 
-    if (dadosSalvos === null) {
-        localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho));
-    } else {
-        try {
-            carrinho = JSON.parse(dadosSalvos) || [];
-        } catch {
-            carrinho = [];
-            localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho));
-        }
+    try {
+
+        const dadosSalvos = JSON.parse(
+            localStorage.getItem(CHAVE_CARRINHO)
+        );
+
+        carrinho = Array.isArray(dadosSalvos)
+            ? dadosSalvos
+            : [];
+
+    } catch (erro) {
+
+        console.error("Erro ao recuperar carrinho:", erro);
+
+        carrinho = [];
+
     }
 
     renderizarCarrinho();
+
     contadorCarrinho();
+
 }
 
-/** -- Salva as alterações no localStorage -- **/
+/* ==========================================
+   PERSISTÊNCIA
+========================================== */
+
 function salvarCarrinho() {
-    localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho));
+
+    localStorage.setItem(
+        CHAVE_CARRINHO,
+        JSON.stringify(carrinho)
+    );
+
+    sincronizarLivrosExternos();
 
     renderizarCarrinho();
+
     contadorCarrinho();
+
 }
 
-/** -- Captura os cliques nos botões -- **/
-document.addEventListener("click", (event) => {
+/* ==========================================
+   ADICIONAR PRODUTO
+========================================== */
 
-    const botaoAdicionar = event.target.closest(".btn-adicionar");
-
-    if (botaoAdicionar) {
-        adicionarItemCarrinho(botaoAdicionar.dataset.id);
-        return;
-    }
-
-    const botaoAumentar = event.target.closest(".btn-aumentar");
-
-    if (botaoAumentar) {
-        const id = botaoAumentar.closest(".item-carrinho").dataset.id;
-        alterarQuantidade(id, 1);
-        return;
-    }
-
-    const botaoDiminuir = event.target.closest(".btn-diminuir");
-
-    if (botaoDiminuir) {
-        const id = botaoDiminuir.closest(".item-carrinho").dataset.id;
-        alterarQuantidade(id, -1);
-        return;
-    }
-
-    const botaoRemover = event.target.closest(".btn-remover");
-
-    if (botaoRemover) {
-        const id = botaoRemover.closest(".item-carrinho").dataset.id;
-        removerItemCarrinho(id);
-    }
-});
-
-/** -- Adiciona um livro ao carrinho -- **/
 function adicionarItemCarrinho(idLivro) {
-    const livro = listaLivros.find(
-        (item) => item.id === Number(idLivro)
-    );
+
+    const livro = obterLivroPorId(idLivro);
 
     if (!livro) return;
 
     const itemExistente = carrinho.find(
-        (item) => item.id === livro.id
+        item => String(item.id) === String(idLivro)
     );
 
     if (itemExistente) {
+
         itemExistente.quantidade++;
+
     } else {
+
         carrinho.push({
-            id: livro.id,
+            id: idLivro,
             quantidade: 1
         });
+
     }
 
     salvarCarrinho();
+
 }
 
-/** -- Altera a quantidade de um livro -- **/
+/* ==========================================
+   ALTERAR QUANTIDADE
+========================================== */
+
 function alterarQuantidade(idLivro, quantidade) {
+
     const item = carrinho.find(
-        (item) => item.id === Number(idLivro)
+        item => String(item.id) === String(idLivro)
     );
 
     if (!item) return;
 
     item.quantidade += quantidade;
 
-    // Impede quantidades menores que 1.
     if (item.quantidade < 1) {
         item.quantidade = 1;
     }
 
     salvarCarrinho();
+
 }
 
-/** -- Remove um livro do carrinho -- **/
+/* ==========================================
+   REMOVER PRODUTO
+========================================== */
+
 function removerItemCarrinho(idLivro) {
+
     carrinho = carrinho.filter(
-        (item) => item.id !== Number(idLivro)
+        item => String(item.id) !== String(idLivro)
     );
 
     salvarCarrinho();
+
 }
 
-/** -- Cria o HTML de um item do carrinho -- **/
+/* ==========================================
+   CALCULAR TOTAL
+========================================== */
+
+function calcularTotalCarrinho() {
+
+    return carrinho.reduce((total, item) => {
+
+        const livro = obterLivroPorId(item.id);
+
+        if (!livro) return total;
+
+        return total + livro.preco * item.quantidade;
+
+    }, 0);
+
+}
+
+/* ==========================================
+   LIMPAR CARRINHO
+========================================== */
+
+function limparCarrinho() {
+
+    carrinho = [];
+
+    salvarCarrinho();
+
+}
+
+/* ==========================================
+   CRIAR ITEM DO CARRINHO
+========================================== */
+
 function criarItemCarrinho(livro, quantidade) {
+
     const subtotal = livro.preco * quantidade;
 
     return `
-        <article class="item-carrinho" data-id="${livro.id}">
+        <article class="item-carrinho"
+            data-id="${escaparHTML(livro.id)}">
 
             <img
-                src="${livro.capa}"
-                alt="Capa do livro ${livro.titulo}"
+                src="${escaparHTML(livro.capa)}"
+                alt="Capa do livro ${escaparHTML(livro.titulo)}"
                 class="imagem-item"
             >
 
             <div class="info-item">
 
-                <h3 class="titulo-item">${livro.titulo}</h3>
+                <h3 class="titulo-item">
+                    ${escaparHTML(livro.titulo)}
+                </h3>
 
                 <span class="preco-item">
                     Unitário: ${formatarPreco(livro.preco)}
@@ -153,13 +211,19 @@ function criarItemCarrinho(livro, quantidade) {
 
                 <div class="controles-quantidade">
 
-                    <button class="btn-diminuir" aria-label="Diminuir quantidade">
+                    <button type="button"
+                        class="btn-diminuir"
+                        aria-label="Diminuir quantidade">
                         -
                     </button>
 
-                    <span class="quantidade-item">${quantidade}</span>
+                    <span class="quantidade-item">
+                        ${quantidade}
+                    </span>
 
-                    <button class="btn-aumentar" aria-label="Aumentar quantidade">
+                    <button type="button"
+                        class="btn-aumentar"
+                        aria-label="Aumentar quantidade">
                         +
                     </button>
 
@@ -167,21 +231,29 @@ function criarItemCarrinho(livro, quantidade) {
 
             </div>
 
-            <button class="btn-remover" aria-label="Remover ${livro.titulo}">
+            <button type="button"
+                class="btn-remover"
+                aria-label="Remover ${escaparHTML(livro.titulo)}">
+
                 <i class="fa-solid fa-trash"></i>
+
             </button>
 
         </article>
     `;
+
 }
 
-/** -- Renderiza os itens do carrinho -- **/
+/* ==========================================
+   RENDERIZAR CARRINHO
+========================================== */
+
 function renderizarCarrinho() {
+
     listaItensCarrinho.innerHTML = "";
 
-    let valorTotal = 0;
-
     if (carrinho.length === 0) {
+
         listaItensCarrinho.innerHTML = `
             <p class="mensagem-carrinho-vazio">
                 Seu carrinho está vazio.
@@ -189,70 +261,151 @@ function renderizarCarrinho() {
         `;
 
         valorTotalCarrinho.textContent = formatarPreco(0);
+
+        btnFinalizarCompra.disabled = true;
+
         return;
     }
 
-    carrinho.forEach((item) => {
+    let valorTotal = 0;
 
-        const livro = listaLivros.find(
-            (livro) => livro.id === item.id
-        );
+    carrinho.forEach(item => {
+
+        const livro = obterLivroPorId(item.id);
 
         if (!livro) return;
 
-        listaItensCarrinho.innerHTML += criarItemCarrinho(
-            livro,
-            item.quantidade
-        );
+        listaItensCarrinho.innerHTML +=
+            criarItemCarrinho(livro, item.quantidade);
 
         valorTotal += livro.preco * item.quantidade;
+
     });
 
-    valorTotalCarrinho.textContent = formatarPreco(valorTotal);
+    valorTotalCarrinho.textContent =
+        formatarPreco(valorTotal);
+
+    btnFinalizarCompra.disabled = false;
+
 }
 
-/** -- Atualiza o contador do carrinho -- **/
+/* ==========================================
+   CONTADOR
+========================================== */
+
 function contadorCarrinho() {
+
     const quantidadeTotal = carrinho.reduce(
         (total, item) => total + item.quantidade,
         0
     );
 
     iconeContadorCarrinho.textContent = quantidadeTotal;
+
 }
 
-/** -- Abre o carrinho -- **/
+/* ==========================================
+   EVENTOS DOS BOTÕES
+========================================== */
+
+document.addEventListener("click", evento => {
+
+    const botaoAdicionar =
+        evento.target.closest(".btn-adicionar");
+
+    if (botaoAdicionar) {
+
+        adicionarItemCarrinho(botaoAdicionar.dataset.id);
+
+        return;
+
+    }
+
+    const botaoAumentar =
+        evento.target.closest(".btn-aumentar");
+
+    if (botaoAumentar) {
+
+        const id = botaoAumentar.closest(".item-carrinho").dataset.id;
+
+        alterarQuantidade(id, 1);
+
+        return;
+
+    }
+
+    const botaoDiminuir =
+        evento.target.closest(".btn-diminuir");
+
+    if (botaoDiminuir) {
+
+        const id = botaoDiminuir.closest(".item-carrinho").dataset.id;
+
+        alterarQuantidade(id, -1);
+
+        return;
+
+    }
+
+    const botaoRemover =
+        evento.target.closest(".btn-remover");
+
+    if (botaoRemover) {
+
+        const id = botaoRemover.closest(".item-carrinho").dataset.id;
+
+        removerItemCarrinho(id);
+
+    }
+
+});
+
+/* ==========================================
+   ABRIR E FECHAR CARRINHO
+========================================== */
+
 function abrirCarrinho() {
+
     gavetaCarrinho.classList.remove("oculto");
+
     gavetaCarrinho.setAttribute("aria-hidden", "false");
+
     document.body.style.overflow = "hidden";
+
 }
 
-/** -- Fecha o carrinho -- **/
 function fecharCarrinho() {
+
     gavetaCarrinho.classList.add("oculto");
+
     gavetaCarrinho.setAttribute("aria-hidden", "true");
+
     document.body.style.overflow = "";
+
 }
 
-/** -- Eventos de abertura e fechamento -- **/
 btnAbrirCarrinho.addEventListener("click", abrirCarrinho);
 
 btnFecharCarrinho.addEventListener("click", fecharCarrinho);
 
-// Fecha ao clicar fora do painel.
-gavetaCarrinho.addEventListener("click", (event) => {
-    if (event.target === gavetaCarrinho) {
+gavetaCarrinho.addEventListener("click", evento => {
+
+    if (evento.target === gavetaCarrinho) {
         fecharCarrinho();
     }
+
 });
 
-// Fecha ao pressionar ESC.
-document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !gavetaCarrinho.classList.contains("oculto")) {
+document.addEventListener("keydown", evento => {
+
+    if (
+        evento.key === "Escape" &&
+        !gavetaCarrinho.classList.contains("oculto")
+    ) {
         fecharCarrinho();
     }
+
 });
 
-/** -- Inicialização -- **/
+/* Inicialização */
 iniciarLocalStorage();
