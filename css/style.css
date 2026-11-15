@@ -13,6 +13,8 @@
     --banner: #B7BDAE;
     --fundo: #E2DDD9;
     --branco: #F7F5F3;
+    --erro: #dc3545;
+    --sucesso: #198754;
 
     --transicao: all 0.3s ease-in-out;
 }
@@ -432,6 +434,37 @@ nav#filtros .filtro.ativo::after {
     min-height: 20px;
 }
 
+
+/* Campo com erro */
+.campo-form input.campo-invalido,
+.campo-form textarea.campo-invalido {
+    border: 1px solid var(--erro);
+    outline: none;
+}
+
+/* Mensagem de erro individual */
+.mensagem-erro {
+    display: block;
+    color: var(--erro);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Feedback geral */
+.feedback-form {
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+.feedback-form.erro {
+    color: var(--erro);
+}
+
+.feedback-form.sucesso {
+    color: var(--sucesso);
+}
+
+
 /* -- modais e gaveta carrinho -- */
 .oculto {
     display: none !important;
@@ -533,7 +566,7 @@ nav#filtros .filtro.ativo::after {
 .subtotal-item {
     font-size: 13px;
     font-weight: 600;
-    color: #198754;
+    color: var(--sucesso);
 }
 
 .mensagem-carrinho-vazio {
@@ -607,7 +640,7 @@ nav#filtros .filtro.ativo::after {
 .btn-remover {
     border: none;
     background: transparent;
-    color: #dc3545;
+    color: var(--erro);
     cursor: pointer;
     font-size: 16px;
     padding: 8px;
