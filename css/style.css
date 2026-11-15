@@ -444,6 +444,8 @@ nav#filtros .filtro.ativo::after {
     z-index: 200;
     background-color: rgba(4, 3, 3, 0.6);
     display: flex;
+
+    transition: var(--transicao);
 }
 
 .overlay-modal {
@@ -527,6 +529,94 @@ nav#filtros .filtro.ativo::after {
     font-size: 1.1rem;
     color: var(--verde-escuro);
 }
+
+.subtotal-item {
+    font-size: 13px;
+    font-weight: 600;
+    color: #198754;
+}
+
+.mensagem-carrinho-vazio {
+    text-align: center;
+    color: #777;
+    padding: 30px 10px;
+}
+
+
+/* Item do carrinho */
+.item-carrinho {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Imagem do livro */
+.imagem-item {
+    width: 75px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Informações */
+.info-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.titulo-item {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.preco-item {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Quantidade */
+.controles-quantidade {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.controles-quantidade button {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.quantidade-item {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Remover */
+.btn-remover {
+    border: none;
+    background: transparent;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px;
+}
+
+.btn-remover:hover {
+    color: #a71d2a;
+}
+
 
 /* -- rodapé -- */
 footer#rodapeSite {
