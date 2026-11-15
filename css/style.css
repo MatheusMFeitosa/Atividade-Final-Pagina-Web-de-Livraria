@@ -921,3 +921,526 @@ footer#rodapeSite {
     color: var(--verde-escuro);
     transform: translateX(-4px);
 }
+
+
+/* ================================
+   RESPONSIVIDADE - ATÉ 1200px
+================================ */
+
+@media (max-width: 1200px) {
+    #menu {
+        width: 90%;
+        gap: 12px;
+    }
+
+    .links-navegacao {
+        gap: 14px;
+    }
+
+    .links-navegacao a {
+        font-size: 0.85rem;
+    }
+
+    #menu label {
+        width: 25%;
+    }
+
+    .banner,
+    .cabecalho-secao,
+    header#conteiner_filtros,
+    .grade-livros,
+    .conteudo-contato,
+    .conteudo-rodape {
+        width: 90%;
+    }
+
+    .banner {
+        padding: 30px;
+    }
+
+    .grade-livros {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .conteudo-contato {
+        gap: 28px;
+        padding: 30px;
+    }
+}
+
+
+/* ================================
+   RESPONSIVIDADE - ATÉ 768px
+   TABLETS E MENU MOBILE
+================================ */
+
+@media (max-width: 768px) {
+    /* Header */
+
+    header#topoSite {
+        height: auto;
+        min-height: 70px;
+    }
+
+    #menu {
+        position: relative;
+        width: 90%;
+        min-height: 70px;
+        height: auto;
+        gap: 12px;
+    }
+
+    #menu .logo-link {
+        height: 42px;
+    }
+
+    #menu #titulo {
+        max-width: 150px;
+        height: 100%;
+    }
+
+    /* Esconde os links do menu tradicional */
+
+    .links-navegacao {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        z-index: 150;
+
+        width: 100%;
+        padding: 18px;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+
+        background-color: var(--verde-escuro);
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Classe adicionada pelo JavaScript */
+
+    #menu.menu-aberto .links-navegacao {
+        display: flex;
+    }
+
+    .links-navegacao li {
+        width: 100%;
+    }
+
+    .links-navegacao a {
+        display: block;
+        padding: 12px 8px;
+        font-size: 0.95rem;
+    }
+
+    .links-navegacao li:not(:last-child) {
+        border-bottom: 1px solid rgba(247, 245, 243, 0.15);
+    }
+
+    /* Pesquisa */
+
+    #menu label {
+        width: auto;
+        flex: 1;
+        min-width: 120px;
+    }
+
+    /* Botões do header */
+
+    .btns-navegacao {
+        gap: 8px;
+    }
+
+    .btns-navegacao .btn-nav {
+        width: 38px;
+        height: 38px;
+    }
+
+    .btn-mobile {
+        display: flex !important;
+    }
+
+    /* Banner */
+
+    .container-banner {
+        padding: 30px 16px;
+    }
+
+    .banner {
+        width: 90%;
+        min-height: auto;
+        padding: 28px;
+        gap: 20px;
+    }
+
+    #conteudoBanner {
+        max-width: 65%;
+    }
+
+    #conteudoBanner .titulo {
+        font-size: 1.7rem;
+    }
+
+    .banner img {
+        max-width: 35%;
+        max-height: 200px;
+        object-fit: contain;
+    }
+
+    /* Seções */
+
+    .cabecalho-secao,
+    header#conteiner_filtros,
+    .grade-livros {
+        width: 90%;
+    }
+
+    .grade-livros {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    /* Filtros */
+
+    header#conteiner_filtros {
+        gap: 20px;
+    }
+
+    nav#filtros {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    /* Sobre e contato */
+
+    .conteudo-contato {
+        width: 90%;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 28px;
+    }
+
+    /* Modal de detalhes */
+
+    .detalhes-livro {
+        grid-template-columns: 190px 1fr;
+        gap: 20px;
+    }
+
+    .ficha-tecnica {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Rodapé */
+
+    .conteudo-rodape {
+        width: 90%;
+    }
+}
+
+
+/* ================================
+   RESPONSIVIDADE - ATÉ 576px
+   CELULARES
+================================ */
+
+@media (max-width: 576px) {
+    /* Header */
+
+    header#topoSite {
+        min-height: auto;
+        padding: 10px 0;
+    }
+
+    #menu {
+        width: 92%;
+        min-height: auto;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        row-gap: 12px;
+    }
+
+    #menu .logo-link {
+        height: 38px;
+    }
+
+    #menu #titulo {
+        max-width: 130px;
+    }
+
+    .btns-navegacao {
+        gap: 7px;
+    }
+
+    .btns-navegacao .btn-nav {
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Pesquisa ocupa uma linha inteira */
+
+    #menu label {
+        order: 3;
+        flex: 0 0 100%;
+        width: 100%;
+        height: 40px;
+    }
+
+    /* Menu dropdown */
+
+    .links-navegacao {
+        top: calc(100% + 8px);
+    }
+
+    /* Banner */
+
+    .container-banner {
+        padding: 22px 12px;
+    }
+
+    .banner {
+        width: 100%;
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+        padding: 24px 18px;
+        gap: 20px;
+    }
+
+    #conteudoBanner {
+        align-items: center;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    #conteudoBanner .titulo {
+        font-size: 1.5rem;
+    }
+
+    #conteudoBanner .texto-principal {
+        font-size: 0.9rem;
+    }
+
+    .banner img {
+        max-width: 65%;
+        max-height: 190px;
+    }
+
+    /* Seções */
+
+    .container-destaques,
+    .container-catalogo {
+        padding: 24px 12px;
+        gap: 20px;
+    }
+
+    .cabecalho-secao,
+    header#conteiner_filtros,
+    .grade-livros {
+        width: 100%;
+    }
+
+    .cabecalho-secao h2,
+    #conteiner_filtros h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Filtros com rolagem horizontal */
+
+    header#conteiner_filtros {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    nav#filtros {
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        gap: 20px;
+    }
+
+    nav#filtros .filtro {
+        flex-shrink: 0;
+        font-size: 0.9rem;
+    }
+
+    /* Catálogo */
+
+    .grade-livros {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .capa-container {
+        height: 190px;
+        padding: 10px;
+    }
+
+    .info-livro {
+        padding: 12px;
+        gap: 7px;
+    }
+
+    .titulo-livro {
+        font-size: 0.92rem;
+    }
+
+    .autor-livro {
+        font-size: 0.78rem;
+    }
+
+    .preco-livro {
+        font-size: 1rem;
+    }
+
+    .btn-adicionar {
+        padding: 9px 6px;
+        font-size: 0.75rem;
+    }
+
+    /* Sobre e contato */
+
+    .container-contato {
+        padding: 24px 12px 0;
+    }
+
+    .conteudo-contato {
+        width: 100%;
+        padding: 22px 18px;
+        gap: 26px;
+    }
+
+    .sobre-livraria h2,
+    .formulario-contato h2 {
+        font-size: 1.3rem;
+    }
+
+    .sobre-livraria p {
+        font-size: 0.9rem;
+    }
+
+    /* Rodapé */
+
+    footer#rodapeSite {
+        padding: 26px 16px;
+    }
+
+    .conteudo-rodape {
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .direitos {
+        font-size: 0.8rem;
+    }
+
+    /* Modal de detalhes */
+
+    .overlay-modal {
+        padding: 12px;
+    }
+
+    .conteudo-modal {
+        max-height: 95vh;
+        padding: 18px;
+    }
+
+    .detalhes-livro {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .detalhes-capa img {
+        max-width: 150px;
+    }
+
+    .detalhes-titulo {
+        font-size: 1.3rem;
+    }
+
+    .ficha-tecnica {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .detalhes-acoes {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .detalhes-acoes .btn-adicionar {
+        width: 100%;
+    }
+
+    /* Carrinho */
+
+    .painel-carrinho {
+        max-width: 100%;
+        padding: 18px;
+    }
+
+    .item-carrinho {
+        gap: 10px;
+    }
+
+    .imagem-item {
+        width: 60px;
+        height: 85px;
+    }
+
+    .titulo-item {
+        font-size: 0.85rem;
+    }
+
+    .preco-item {
+        font-size: 0.8rem;
+    }
+}
+
+
+/* ================================
+   TELAS MUITO ESTREITAS
+   ATÉ 380px
+================================ */
+
+@media (max-width: 380px) {
+    .grade-livros {
+        grid-template-columns: 1fr;
+    }
+
+    .capa-container {
+        height: 230px;
+    }
+
+    .banner img {
+        max-width: 75%;
+    }
+
+    #conteudoBanner .titulo {
+        font-size: 1.3rem;
+    }
+
+    .btns-navegacao .btn-nav {
+        width: 34px;
+        height: 34px;
+    }
+
+    .conteudo-contato {
+        padding: 18px 14px;
+    }
+
+    .ficha-tecnica {
+        grid-template-columns: 1fr;
+    }
+}
